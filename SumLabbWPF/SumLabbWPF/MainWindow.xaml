@@ -1,0 +1,364 @@
+﻿<Window x:Class="SumLabbWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SumLabbWPF" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" FontFamily="Times New Roman" FontSize="14" Height="950" Width="1400" Loaded="Window_Loaded">
+    <Grid x:Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="30*" />
+        </Grid.RowDefinitions>
+
+
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
+            <Button Width="100" Height="20" Content="Помощь" />
+            <Button Width="100" Height="20" Content="Описание" />
+            <Button Width="250" Height="20" Content="Основные теоретические сведения" />
+        </ToolBar>
+        
+        
+        <DataGrid Grid.Column="0" Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="False"
+                  CanUserAddRows="True"
+                  CanUserDeleteRows="True"
+                  ColumnWidth="*"
+                  x:Name="DG"
+                  FontFamily="Times New Roman"
+                  FontSize="18"
+                  FontWeight="Bold">
+
+
+           
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First column"/>
+                    <DataGridTextColumn Header="Second column"/>
+                    <DataGridTextColumn Header="Third column"/>
+                </DataGrid.Columns>
+  
+        </DataGrid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+
+
+                <TextBlock 
+                    Text="I (соленоида)" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,20,0,0"/>
+
+                <TextBlock 
+                    Text="Кликов = " 
+                    x:Name="textb"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="200,20,0,0"/>
+                <Ellipse
+                    Width="10"
+                    Height="10"
+                    Fill="Blue"
+                    VerticalAlignment="Top"
+                    Margin="0,224,3.5,0"
+                    RenderTransformOrigin="0.5,0.5"/>
+
+            
+                <Image Source="/Assets/New/mAnew.png" 
+                       Height="100" Width="300"
+                       VerticalAlignment="Top"
+                       Margin="0,63,0,0"/>
+                <Image 
+                    Source="/Assets/New/arrow.png"
+                    Stretch="Fill" 
+                    x:Name="Ic_Arrow"
+                    Height="140" Width="14" 
+                    StretchDirection="Both" 
+                    VerticalAlignment="Top"
+                    Margin="0,96,0,0" 
+                    RenderTransformOrigin="0.5,0.955"
+                    MouseDown="Ic_Arrow_MouseDown">
+
+
+
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="-57.5"/>
+                    </Image.RenderTransform>
+
+                    <!--<Image.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter" >
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetProperty="RenderTransform.Angle"
+                                        From="-57.5" To="{Binding RotateValue}" 
+                                        Duration="0:0:.4">
+                                        <DoubleAnimation.EasingFunction>
+                                            <QuarticEase />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    --><!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
+                                        <DoubleAnimation.EasingFunction>
+                                            <QuarticEase />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>--><!--
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Image.Triggers>-->
+
+
+                </Image>
+
+           
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,350,0,0"
+                            VerticalAlignment="Top">
+                    <Button Content="x2"
+                            Width="30" Height="30"/>
+                    <Button Content="x4"
+                            Width="30" Height="30" />
+                    <Button Content="x10"
+                            Width="30" Height="30" />
+                    <Button Content="x40"
+                            Width="30" Height="30"/>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Column="1"
+                    Text="I (анода)" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,20,0,0"/>
+
+
+
+
+
+
+
+                <Ellipse
+                    Grid.Column="1"
+                    Width="10"
+                    Height="10"
+                    Fill="Blue"
+                    VerticalAlignment="Top"
+                    Margin="0,224,3.5,0"/>
+                <Image Source="/Assets/New/maNew2.png"
+                       Grid.Column="1"
+                       Height="100" Width="300"
+                       VerticalAlignment="Top"
+                       Margin="0,55,0,0"/>
+                <Image 
+                    Grid.Column = "1"
+                    Source="/Assets/New/arrow.png"
+                    Stretch="Fill" 
+                    x:Name="Ia_Arrow"
+                    Height="140" Width="14" 
+                    StretchDirection="Both" 
+                    VerticalAlignment="Top"
+                    Margin="0,96,0,0" 
+                    MouseDown="Ia_Arrow_MouseDown"
+                    RenderTransformOrigin="0.5,0.955">
+
+
+
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="-55"/>
+                    </Image.RenderTransform>
+
+                    <!--<Image.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter" >
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetProperty="RenderTransform.Angle"
+                                        From="-57.5" To="{Binding Path=RotateValue}" 
+                                        Duration="0:0:.4">
+                                        <DoubleAnimation.EasingFunction>
+                                            <QuarticEase />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    -->
+                    <!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
+                                        <DoubleAnimation.EasingFunction>
+                                            <QuarticEase />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>-->
+                    <!--
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Image.Triggers>-->
+
+
+                </Image>
+                <StackPanel 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,270,0,0"
+                    VerticalAlignment="Top"
+                    Grid.Column="1">
+                    <Button Content="x2"
+                            Width="30" Height="30"/>
+                    <Button Content="x4"
+                            Width="30" Height="30" />
+                    <Button Content="x10"
+                            Width="30" Height="30" />
+                    <Button Content="x40"
+                            Width="30" Height="30"/>
+                </StackPanel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*" />
+
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                    Grid.Column="1"
+                    Text="U (анода)" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,20,0,0"/>
+
+
+
+                    <Ellipse
+                    Grid.Column="1"
+                    Width="10"
+                    Height="10"
+                    Fill="Blue"
+                    VerticalAlignment="Top"
+                    Margin="0,224,3.5,0"/>
+                    <Image Source="/Assets/New/V.png"
+                       Grid.Column="1"
+                       Height="100" Width="300"
+                       VerticalAlignment="Top"
+                       Margin="0,55,0,0"/>
+                    <Image 
+                    Grid.Column = "1"
+                    MouseDown="Ua_Arrow_MouseDown"
+                    Source="/Assets/New/arrow.png"
+                    Stretch="Fill" 
+                    x:Name="Ua_Arrow"
+                    Height="140" Width="14" 
+                    StretchDirection="Both" 
+                    VerticalAlignment="Top"
+                    Margin="0,96,0,0" 
+                    RenderTransformOrigin="0.5,0.955">
+
+
+
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="4"/>
+                        </Image.RenderTransform>
+
+                        <!--<Image.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter" >
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                        Storyboard.TargetProperty="RenderTransform.Angle"
+                                        From="-57.5" To="{Binding Path=RotateValue}" 
+                                        Duration="0:0:.4">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuarticEase />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        -->
+                        <!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
+                                        <DoubleAnimation.EasingFunction>
+                                            <QuarticEase />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>-->
+                        <!--
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Image.Triggers>-->
+
+
+                    </Image>
+                    <StackPanel 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,270,0,0"
+                    VerticalAlignment="Top"
+                    Grid.Column="1">
+                        <Button Content="x2"
+                            Width="30" Height="30"/>
+                        <Button Content="x4"
+                            Width="30" Height="30" />
+                        <Button Content="x10"
+                            Width="30" Height="30" />
+                        <Button Content="x40"
+                            Width="30" Height="30"/>
+                    </StackPanel>
+
+
+                    <Grid Height="120" VerticalAlignment="Bottom" Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel  
+                        Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        Grid.Row="0"/>
+                        <Button Grid.Row="0" Width="100" Height="30" 
+                            HorizontalAlignment="Right"
+                            Margin="0,0,20,0"
+                            Content="Задать"
+                            x:Name="UaRead"
+                            Click="UaRead_Click"/>
+                    </Grid>
+                </Grid>
+
+
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
