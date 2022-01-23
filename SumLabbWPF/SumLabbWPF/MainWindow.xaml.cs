@@ -1,22 +1,10 @@
-﻿using LiveCharts;
-using LiveCharts.Helpers;
-using LiveCharts.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace SumLabbWPF
 {
@@ -65,6 +53,7 @@ namespace SumLabbWPF
         List<double> Imax = new List<double>() { 2, 1.833, 1.666, 1.499, 1.333, 1.166, 1 };
         List<double> Imin = new List<double>() { 0.7, 0.633, 0.566, 0.5, 0.433, 0.366, 0.3 };
         List<double> Ickr = new List<double>();
+        List<double> Ia = new List<double>();
 
         double em = 1.76 * Math.Pow(10, 4);
         double l = 0.1;
@@ -79,10 +68,7 @@ namespace SumLabbWPF
         {
             InitializeComponent();
             //double step = 0.14285714285714285714285714285714; // Экспериментов = 7
-            //DG.Columns.Insert(DG.Columns.Count, new DataGridTextColumn { Header = "Анодный ток (Ia)" });
-            //DG.Columns.Insert(DG.Columns.Count, new DataGridTextColumn { Header = "Ток соленоида (Ic)" });
-            //DG.Columns.Insert(DG.Columns.Count, new DataGridTextColumn { Header = "ΔIa" });
-            //DG.Columns.Insert(DG.Columns.Count, new DataGridTextColumn { Header = "ΔIa/ΔIc" });
+          
         }
 
         double ClickCountUa(int ccount)
@@ -128,29 +114,72 @@ namespace SumLabbWPF
 
 
 
+        public void SetUa(int UaCC)
+        {
+            for (int i = 0; i < Ua.Count; i++)
+            {
+                if (UaCC == i)
+                {
+                    //IaCalc(Ua[i]);
+                }
+            }
+
+        }
 
         private void UaRead_Click(object sender, RoutedEventArgs e)
         {
             rotateTransform1.Angle = -57;
+
+
             // нужно отправить анодное напряжение
 
-            string str = "Анодное напряжение установлено. Ua = " + ClickCountUa(UaClickCount).ToString();
+            SetUa(UaClickCount);
+            string str = "Анодное напряжение установлено. Ua = " + ClickCountUa(UaClickCount).ToString() + "\nУстанавливайте и снимайте показания тока соленоида и анодного тока";
+            
             MessageBox.Show(str, "Успешно!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+
+            
         }
 
-     
-       
-        
+     // Осталось тупо привязать клики Ic к и Ia и с ДатаГридом
 
-
-        void M()
+        public void DataConnector(double Ic, double Ua)
         {
 
+        }
+
+        public double IcCurrent(int IcCurrentCC)
+        {
+            int ic = 0;
+            for (int i = 0; i < 51; i++)
+            {
+                
+                if (i == IcCurrentCC)
+                {
+                    //IaCalc(ic);
+                }
+                else
+                {
+                    ic += 20;
+                }
+            }
+            return 0;
+        }
+
+        public double IaCalc(double UaCurrent, double IcCurrent)
+        {
+
+            textb.Text = UaCurrent.ToString();
+            double Ia = 0; // Ia = (Imax - Imin) / (e^(10x-(10*Ickr)) + 1)     +    Imin
 
 
-
-
-
+            for (int i = 0; i < Ua.Count; i++)
+            {
+                if (UaCurrent == Ua[i])
+                {
+                    // Ia = (Imax[0] - Imin[0]) / (Math.Pow(Math.E, (10*));
+                }
+            }
 
             /* Вычисление Icкр для каждого Ua */
             for (int i = 0; i < Ua.Count; i++)
@@ -168,16 +197,13 @@ namespace SumLabbWPF
 
             //double Ia = (Imax - Imin) / ((Math.Pow(Math.E, (10*Ic)) + 1) + Imin)
 
-            List<double> x = new List<double>();
-            for (int i = -50; i < 50; i++)
-            {
-                x.Add(i);
-            }
+           
 
-            for (int i = 0; i < x.Count; i++)
-            {
-            }
+
+            return 0;
+            //textb.Text = UaCurrent.ToString();
         }
+       
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -188,45 +214,7 @@ namespace SumLabbWPF
 
        
 
-        //double ClickCountIc(int ccount)
-        //{
-        //    if (ccount == 0)
-        //    {
-        //        return Ia[0];
-        //    }
-        //    else if (ccount == 1)
-        //    {
-        //        return Ia[1];
-        //    }
-        //    else if (ccount == 2)
-        //    {
-        //        return Ia[2];
-        //    }
-        //    else if (ccount == 3)
-        //    {
-        //        return Ia[3];
-        //    }
-        //    else if (ccount == 4)
-        //    {
-        //        return Ia[4];
-        //    }
-        //    else if (ccount == 5)
-        //    {
-        //        return Ia[5];
-        //    }
-        //    else if (ccount == 6)
-        //    {
-        //        return Ia[6];
-        //    }
-        //    else if (ccount == 7)
-        //    {
-        //        return Ia[7];
-        //    }
-        //    else
-        //    {
-        //        return 0;
-        //    }
-        //}
+       
 
 
 
@@ -281,24 +269,24 @@ namespace SumLabbWPF
             if (y1 == 27)
             {
                 y1 = 0;
-                rotateTransform1.Angle += 0.5;
+                rotateTransform1.Angle += 0.35;
             }
             if (x1 == 41)
             {
                 x1 = 0;
-                rotateTransform1.Angle -= 0.3;
+                rotateTransform1.Angle -= 0.4;
             }
 
             if (z1 == 45)
             {
                 z1 = 0;
-                rotateTransform1.Angle -= 1;
+                rotateTransform1.Angle -= 1.5;
             }
             rotateTransform1.Angle += 2.2;
 
 
             IcClickCount++;
-            textb.Text = IcClickCount.ToString();
+            //textb.Text = IcClickCount.ToString();
             if (IcClickCount == 51)
             {
                 IcClickCount = 0;
@@ -380,7 +368,6 @@ namespace SumLabbWPF
             y3++;
             x3++;
             z3++;
-            var k = rotateTransform3.Angle;
 
             if (l3 == 4)
             {
@@ -395,7 +382,7 @@ namespace SumLabbWPF
                 rotateTransform3.Angle = 0;
             }
             
-            rotateTransform3.Angle += 3.3;
+            rotateTransform3.Angle += 3.5;
 
 
             img3.RenderTransform = rotateTransform3;
@@ -421,6 +408,8 @@ namespace SumLabbWPF
         private void Ic_Arrow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ToRotateIc(Ic_Arrow);
+            
+            IcCurrent(IcClickCount);
         }
 
         private void Ia_Arrow_MouseDown(object sender, MouseButtonEventArgs e)
