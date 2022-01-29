@@ -25,20 +25,15 @@
         </ToolBar>
 
 
-        <DataGrid Grid.Row="1">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding LabData}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="True" CanUserDeleteRows="True" CanUserSortColumns="True" CanUserReorderColumns="True"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="30" HorizontalAlignment="Center">
+            <Button Content="Добавить" Margin="2" Command="{Binding AddRowCommand}"/>
+            <Button Content="Информация" Margin="2" Command="{Binding GetRowInfoCommand}"/>
+        </StackPanel>
 
-
-
-            <DataGrid.Columns>
-                    <DataGridTextColumn Header="First column"/>
-                    <DataGridTextColumn Header="Second column"/>
-                    <DataGridTextColumn Header="Third column"/>
-                </DataGrid.Columns>
-  
-        </DataGrid>
 
         <Grid Grid.Column="1" Grid.Row="1">
-            
+
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
@@ -56,9 +51,9 @@
                 <TextBlock 
                     Text="Кликов = " 
                     x:Name="textb"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Margin="200,20,0,0"/>
+                    Margin="85,302,0,0"/>
                 <Ellipse
                     Width="10"
                     Height="10"
@@ -67,7 +62,7 @@
                     Margin="0,224,3.5,0"
                     RenderTransformOrigin="0.5,0.5"/>
 
-            
+
                 <Image Source="/Assets/New/mAnew.png" 
                        Height="100" Width="300"
                        VerticalAlignment="Top"
@@ -101,11 +96,13 @@
                                             <QuarticEase />
                                         </DoubleAnimation.EasingFunction>
                                     </DoubleAnimation>
-                                    --><!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
+                                    -->
+                    <!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
                                         <DoubleAnimation.EasingFunction>
                                             <QuarticEase />
                                         </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>--><!--
+                                    </DoubleAnimation>-->
+                    <!--
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -114,7 +111,7 @@
 
                 </Image>
 
-           
+
 
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"

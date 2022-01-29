@@ -13,6 +13,8 @@ namespace SumLabbWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
+       
         // Счетчики
         int l1 = 0;
         int m1 = 0;
@@ -49,26 +51,43 @@ namespace SumLabbWPF
         RotateTransform rotateTransform2 = new RotateTransform(-55); // ротация Ia
         RotateTransform rotateTransform3 = new RotateTransform(3.5); // ротация Ua
 
-        List<double> Ua = new List<double>() { 16, 17, 18, 19, 20, 21, 22 };
-        List<double> Imax = new List<double>() { 2, 1.833, 1.666, 1.499, 1.333, 1.166, 1 };
-        List<double> Imin = new List<double>() { 0.7, 0.633, 0.566, 0.5, 0.433, 0.366, 0.3 };
-        List<double> Ickr = new List<double>();
-        List<double> Ia = new List<double>();
+        List<double> Ua = new List<double>() { 16, 17, 18, 19, 20, 21, 22 }; // В
+        List<double> Imax = new List<double>() { 1, 1.166, 1.333, 1.499, 1.666, 1.833, 2 }; // мА
+        List<double> Imin = new List<double>() { 0.3, 0.366, 0.433, 0.5, 0.566, 0.633, 0.7}; // мА
+        List<double> Ickr = new List<double>() { 0.286, 0.295, 0.304, 0.312, 0.32, 0.328, 0.336}; // мА
+        double Ia = 0;
 
-        double em = 1.76 * Math.Pow(10, 4);
+        double em = 1.76 * 1000; //Math.Pow(10, 4);
         double l = 0.1;
-        double Ra = 5 * Math.Pow(10, -3);
-        double nu0 = 4 * Math.PI * Math.Pow(10, -7);
+        double Ra = 5 * 0.001; //Math.Pow(10, -3);
+        double nu0 = 4 * 3.14 * 0.0000001;//Math.Pow(10, -7);
         double N = 1500;
 
         double Ic = 0;
 
         // /Наборы переменных и массивов 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private MainVM MainVM { get; } = new MainVM();
         public MainWindow()
         {
             InitializeComponent();
             //double step = 0.14285714285714285714285714285714; // Экспериментов = 7
-          
+            DataContext = MainVM;
         }
 
         double ClickCountUa(int ccount)
@@ -114,40 +133,24 @@ namespace SumLabbWPF
 
 
 
-        public void SetUa(int UaCC)
-        {
-            for (int i = 0; i < Ua.Count; i++)
-            {
-                if (UaCC == i)
-                {
-                    //IaCalc(Ua[i]);
-                }
-            }
-
-        }
+       
 
         private void UaRead_Click(object sender, RoutedEventArgs e)
         {
             rotateTransform1.Angle = -57;
+            IcClickCount = 0;
 
-
-            // нужно отправить анодное напряжение
-
-            SetUa(UaClickCount);
+            var a = ClickCountUa(UaClickCount);
+            
+            
             string str = "Анодное напряжение установлено. Ua = " + ClickCountUa(UaClickCount).ToString() + "\nУстанавливайте и снимайте показания тока соленоида и анодного тока";
-            
             MessageBox.Show(str, "Успешно!", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-
             
         }
 
-     // Осталось тупо привязать клики Ic к и Ia и с ДатаГридом
+       
 
-        public void DataConnector(double Ic, double Ua)
-        {
-
-        }
-
+       
         public double IcCurrent(int IcCurrentCC)
         {
             int ic = 0;
@@ -156,7 +159,8 @@ namespace SumLabbWPF
                 
                 if (i == IcCurrentCC)
                 {
-                    //IaCalc(ic);
+                    return ic;
+                    break;
                 }
                 else
                 {
@@ -166,72 +170,38 @@ namespace SumLabbWPF
             return 0;
         }
 
+        public void M(double a)
+        {
+            var aa = a;
+            var b = IcCurrent(IcClickCount);
+
+            IaCalc(aa / 1000, b / 1000);
+        }
+
+
         public double IaCalc(double UaCurrent, double IcCurrent)
         {
 
-            textb.Text = UaCurrent.ToString();
-            double Ia = 0; // Ia = (Imax - Imin) / (e^(10x-(10*Ickr)) + 1)     +    Imin
-
 
             for (int i = 0; i < Ua.Count; i++)
             {
-                if (UaCurrent == Ua[i])
+                if (UaCurrent == Ua[i] / 1000)
                 {
-                    // Ia = (Imax[0] - Imin[0]) / (Math.Pow(Math.E, (10*));
+                    Ia = ((Imax[i] - Imin[i]) / (Math.Pow(Math.E, (10 * IcCurrent - (10 * Ickr[i]))) + 1)) + Imin[i];
+                    
                 }
             }
 
-            /* Вычисление Icкр для каждого Ua */
-            for (int i = 0; i < Ua.Count; i++)
-            {
-                double k = Math.Sqrt((8*Ua[i])/em) * (l/(Ra*nu0*N));
-                Ickr.Add(k);
-            }
-
-
-
-
-
-
-
-
-            //double Ia = (Imax - Imin) / ((Math.Pow(Math.E, (10*Ic)) + 1) + Imin)
-
-           
-
+            textb.Text = (UaCurrent * 1000).ToString() + " " + (IcCurrent * 1000).ToString() + "     =     " + Ia.ToString();
 
             return 0;
-            //textb.Text = UaCurrent.ToString();
         }
-       
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show
         }
-
-
-       
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
         
         void ToRotateIc(Image img1)
         {
@@ -399,22 +369,28 @@ namespace SumLabbWPF
            
             
         }
-        // /Процесс изменения положения (угла) стрелки каждого прибора
+
+        void R(Image img2)
+        {
+            var k = rotateTransform2.Angle;
+            rotateTransform2.Angle += 3.65;
 
 
+            img2.RenderTransform = rotateTransform2;
+        }
 
 
         /*Непосредственно, расчет и передача в MouseDown каждого прибора*/
         private void Ic_Arrow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ToRotateIc(Ic_Arrow);
-            
-            IcCurrent(IcClickCount);
+            var a = ClickCountUa(UaClickCount);
+            M(a);
         }
 
         private void Ia_Arrow_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ToRotateIa(Ia_Arrow);
+            R(Ia_Arrow);
         }
 
         private void Ua_Arrow_MouseDown(object sender, MouseButtonEventArgs e)
