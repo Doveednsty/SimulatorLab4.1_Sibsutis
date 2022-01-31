@@ -8,9 +8,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/arrow.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/manew.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/manew2.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/v.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page1.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page10.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page11.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page12.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page13.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page14.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page15.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page16.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page17.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page18.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page2.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page3.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page4.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page5.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page6.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page7.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page8.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/new/page9.png")]
 
 

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -28,7 +24,7 @@ namespace SumLabbWPF
         private void GetRowInfo()
         {
             if (SelectedItem != null)
-                MessageBox.Show($"Имя: {SelectedItem.IaDG}\nФамилия: {SelectedItem.IcDG}\nВозраст: {SelectedItem.DeltaIa}");
+                MessageBox.Show($"Анодный ток = {SelectedItem.IaDG}\nТок соленоида =  {SelectedItem.IcDG}\nΔIa = {SelectedItem.DeltaIa}\nОтношение Ia/Ic = {SelectedItem.DeltaIa}");
         }
     }
 }

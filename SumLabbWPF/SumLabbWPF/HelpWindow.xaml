@@ -1,0 +1,68 @@
+﻿<Window x:Class="SumLabbWPF.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SumLabbWPF"
+        mc:Ignorable="d"
+        Title="Помощь" Height="450" Width="800" FontFamily="Times New Roman">
+    <Grid>
+        <ScrollViewer>
+            
+            <StackPanel>
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Text="Помощь"/>
+            <Line
+                HorizontalAlignment="Center"
+                X1="110" Y1="0"
+                Stroke="#252525"
+                StrokeThickness="0.5" />
+            <TextBlock Margin="5,0,0,3" FontSize="18"
+                       Text="Программа состоит из: " />
+            <TextBlock Margin="30,0,0,3" FontSize="18"
+                       Text="1. таблицы для записей данных пользователя (а)" />
+            <Image Source="/Assets/New/DataGrid.png" 
+                   Width="300"/>
+
+            <TextBlock Margin="30,0,0,3" FontSize="18"
+                       Text="2. трёх приборов (б)" />
+            <Image Source="/Assets/New/Appliances.png"
+                       Width="300"/>
+
+            <TextBlock Margin="30,0,0,3" FontSize="18"
+                       Text="3. панели навигации (с)" />
+            <Image Source="/Assets/New/Toolbar.png"
+                    Width="600"/>
+ 
+            <TextBlock Text=""/>
+            <TextBlock 
+                Margin="5,0,0,3" FontSize="18"
+                Text="Для корректной работы приложения, следуйте небольшим инструкциям:"/>
+
+            <TextBlock 
+                Margin="30,0,0,3" FontSize="18"
+                Text="1. Ввод десятичных дробей производится через запятую"/>
+            <TextBlock 
+                Margin="30,0,0,3" FontSize="18"
+                Text="2. Перед тем, как начать снимать показания, задайте Ua (анодное напряжение) и нажмите"/>
+            <TextBlock 
+                Margin="48,0,0,3" FontSize="18"
+                Text="кнопку «Задать», затем вводите значения Ic (ток соленоида) и нажмите кнопку «Расчёт»" />
+            <TextBlock 
+                Margin="30,0,0,3" FontSize="18"
+                Text="3. Для генерации новых строк в записной таблице (а), нажмите кнопку «Добавить». Для " />
+            <TextBlock 
+                Margin="48,0,0,3" FontSize="18"
+                Text="вывода уточняющей информации, выделите строку и нажмите кнопку «Информация»" />
+
+            </StackPanel>
+            
+            
+            
+            
+            
+        </ScrollViewer>
+    </Grid>
+</Window>

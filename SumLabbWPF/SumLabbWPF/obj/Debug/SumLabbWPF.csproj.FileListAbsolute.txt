@@ -21,3 +21,7 @@ E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\bin\Debug\LiveCharts.xml
 E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\bin\Debug\LiveCharts.Wpf.pdb
 E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\bin\Debug\LiveCharts.Wpf.xml
 E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\obj\Debug\SumLabbWPF.csproj.CopyComplete
+E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\obj\Debug\HelpWindow.g.cs
+E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\obj\Debug\HelpWindow.baml
+E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\obj\Debug\OTSWindow.g.cs
+E:\reposit\!SEC2\SumLabbWPF\SumLabbWPF\obj\Debug\OTSWindow.baml

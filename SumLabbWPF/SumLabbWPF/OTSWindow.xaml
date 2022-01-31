@@ -1,0 +1,66 @@
+﻿<Window x:Class="SumLabbWPF.OTSWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SumLabbWPF"
+        mc:Ignorable="d"
+        Title="Основные теоретические сведения" Height="600" Width="800" FontFamily="Times New Roman" FontSize="14">
+    <Grid>
+        <!--<StackPanel>
+            <StackPanel>
+                <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,15" Text="Лабораторная работа 4.1"/>
+                <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="ОПРЕДЕЛЕНИЕ УДЕЛЬНОГО ЗАРЯДА ЭЛЕКТРОНА МЕТОДОМ МАГНЕТРОНА" />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" Margin="0,10,0,5" FontWeight="Bold" Text="1. ЦЕЛЬ РАБОТЫ" />
+                <ListView>
+                    <TextBlock>1. Ознакомиться с законами движения заряженных частиц в электрическом  и магнитном полях.</TextBlock>
+                    <TextBlock>2. Определить удельный заряд электрона с помощью цилиндрического магнетрона.</TextBlock>
+                </ListView>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" Margin="0,10,0,5" FontWeight="Bold" Text="2. ОСНОВНЫЕ ТЕОРЕТИЧЕСКИЕ СВЕДЕНИЯ" />
+                <Label>
+                    <TextBlock Margin="0,0,0,0"><Span>Магнетроном называется электровакуумное устройство, в котором 
+                движение электронов происходит во взаимно перпендикулярных</Span><LineBreak/>
+                электрическом и магнитном полях. Одно из применений магнетрона в том, что 
+                он является источником электромагнитного<LineBreak/> излучения СВЧ диапазона:
+                𝑓~10⁹ ÷ 10¹² Гц. Магнетрон является основным элементом СВЧ печей 
+                (микроволновых печей),<LineBreak/> магнетроны широко используют в современных 
+                радиолокационных станциях.
+                    </TextBlock>
+                </Label>
+            </StackPanel>
+
+        </StackPanel>-->
+
+        <ScrollViewer>
+
+            <StackPanel>
+                <Image Source="/Assets/New/Page1.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page2.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page3.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page4.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page5.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page6.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page7.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page8.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page9.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page10.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page11.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page12.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page13.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page14.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page15.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page16.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page17.png" Stretch="UniformToFill"/>
+                <Image Source="/Assets/New/Page18.png" Stretch="UniformToFill"/>
+            </StackPanel>
+        </ScrollViewer>
+        
+
+    </Grid>
+</Window>

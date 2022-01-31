@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SumLabbWPF" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" FontFamily="Times New Roman" FontSize="14" Height="950" Width="1400" Loaded="Window_Loaded">
+        Title="Симулятор лабораторной работы №4.1" WindowStartupLocation="CenterScreen" 
+        FontFamily="Times New Roman" FontSize="14" 
+        Height="950" Width="1400" 
+        MinHeight="700" MinWidth="1000"
+        Loaded="Window_Loaded">
+
+
+
     <Grid x:Name="grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -19,333 +26,160 @@
 
 
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Width="100" Height="20" Content="Помощь" />
-            <Button Width="100" Height="20" Content="Описание" />
-            <Button Width="250" Height="20" Content="Основные теоретические сведения" />
+            <Button x:Name="HelpBtn" Click="HelpBtn_Click" Width="100" Height="30" Content="Помощь" />
+            <Button x:Name="OTS" Click="OTS_Click" Width="250" Height="30" Content="Основные теоретические сведения" />
         </ToolBar>
 
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding LabData}" SelectedItem="{Binding SelectedItem}" CanUserAddRows="True" CanUserDeleteRows="True" CanUserSortColumns="True" CanUserReorderColumns="True"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Height="30" HorizontalAlignment="Center">
-            <Button Content="Добавить" Margin="2" Command="{Binding AddRowCommand}"/>
-            <Button Content="Информация" Margin="2" Command="{Binding GetRowInfoCommand}"/>
+        <DataGrid 
+            Grid.Row="1" 
+            ItemsSource="{Binding LabData}" 
+            SelectedItem="{Binding SelectedItem}" 
+            CanUserAddRows="True" CanUserDeleteRows="True" 
+            CanUserSortColumns="True" 
+            CanUserReorderColumns="True"
+            ColumnWidth="*"
+            FontSize="20"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn FontSize="24" Header="Ток соленоида" Binding="{Binding IcDG}"/>
+                <DataGridTextColumn FontSize="24" Header="Анодный ток" Binding="{Binding IaDG}"/>
+                <DataGridTextColumn FontSize="24" Header="ΔIa" Binding="{Binding DeltaIa}"/>
+                <DataGridTextColumn FontSize="24" Header="Отношение Ia/Ic" Binding="{Binding IaIcAttitude}"/>
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+        
+        
+        
+        
+        <StackPanel
+            Orientation="Horizontal" 
+            Grid.Row="1" 
+            Height="100" 
+            VerticalAlignment="Bottom">
+            <Button Content="Добавить" Height="40" Width="100" FontSize="18" Margin="20,0,20,0" Command="{Binding AddRowCommand}"/>
+            <Button Visibility="Hidden" Content="Информация" Height="40" Width="120" FontSize="18" Command="{Binding GetRowInfoCommand}"/>
         </StackPanel>
 
 
         <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
 
-
-
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,0">
                 <TextBlock 
-                    Text="I (соленоида)" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="0,20,0,0"/>
+                    Text="Ic (ток соленоида)" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,20,0,0"
+                    FontWeight="Black"
+                    FontSize="24"/>
 
-                <TextBlock 
-                    Text="Кликов = " 
-                    x:Name="textb"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Margin="85,302,0,0"/>
-                <Ellipse
-                    Width="10"
-                    Height="10"
-                    Fill="Blue"
-                    VerticalAlignment="Top"
-                    Margin="0,224,3.5,0"
-                    RenderTransformOrigin="0.5,0.5"/>
+                <TextBox 
+                    BorderBrush="#252525"
+                    BorderThickness="10"
+                    Padding="5"
+                    Foreground="#252525"
+                    Text="0,00"
+                    x:Name="Ic_TextBox"
+                    PreviewTextInput="Ic_TextBox_PreviewTextInput"
+                    HorizontalAlignment="Center" 
+                    Margin="0,40,0,0"
+                    FontSize="62"
+                    FontFamily="a_LCDNova"/>
 
-
-                <Image Source="/Assets/New/mAnew.png" 
-                       Height="100" Width="300"
-                       VerticalAlignment="Top"
-                       Margin="0,63,0,0"/>
-                <Image 
-                    Source="/Assets/New/arrow.png"
-                    Stretch="Fill" 
-                    x:Name="Ic_Arrow"
-                    Height="140" Width="14" 
-                    StretchDirection="Both" 
-                    VerticalAlignment="Top"
-                    Margin="0,96,0,0" 
-                    RenderTransformOrigin="0.5,0.955"
-                    MouseDown="Ic_Arrow_MouseDown">
-
-
-
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="-57.5"/>
-                    </Image.RenderTransform>
-
-                    <!--<Image.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter" >
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation 
-                                        Storyboard.TargetProperty="RenderTransform.Angle"
-                                        From="-57.5" To="{Binding RotateValue}" 
-                                        Duration="0:0:.4">
-                                        <DoubleAnimation.EasingFunction>
-                                            <QuarticEase />
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>
-                                    -->
-                    <!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
-                                        <DoubleAnimation.EasingFunction>
-                                            <QuarticEase />
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>-->
-                    <!--
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Image.Triggers>-->
-
-
-                </Image>
-
-
-
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="0,350,0,0"
-                            VerticalAlignment="Top">
-                    <Button Content="x2"
-                            Width="30" Height="30"/>
-                    <Button Content="x4"
-                            Width="30" Height="30" />
-                    <Button Content="x10"
-                            Width="30" Height="30" />
-                    <Button Content="x40"
-                            Width="30" Height="30"/>
-                </StackPanel>
-
-            </Grid>
-
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1.5*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
                 <TextBlock
-                    Grid.Column="1"
-                    Text="I (анода)" 
+                    Text="mA"
+                    FontSize="22"
+                    FontWeight="Bold"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="0,20,0,0"/>
+                    Margin="0,10,0,0"/>
+                <Button
+                    x:Name="CalcBtn"
+                    Click="CalcBtn_Click"
+                    Content="Расчёт"
+                    Width="100"
+                    Height="30"
+                    Margin="0,50,0,0"/>
+            </StackPanel>
 
 
 
 
+            <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock 
+                    Text="Ia (ток соленоида)" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,20,0,0"
+                    FontWeight="Black"
+                    FontSize="24"/>
+                <TextBox
+                    
+                    BorderBrush="#252525"
+                    BorderThickness="10"
+                    Padding="5"
+                    Foreground="#252525"
+                    IsReadOnly="True"
+                    x:Name="Ia_TextBox"
+                    PreviewTextInput="Ia_TextBox_PreviewTextInput"
+                    Text="0,00" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,40,0,0"
+                    FontSize="62"
+                    FontFamily="a_LCDNova"/>
 
-
-
-                <Ellipse
-                    Grid.Column="1"
-                    Width="10"
-                    Height="10"
-                    Fill="Blue"
-                    VerticalAlignment="Top"
-                    Margin="0,224,3.5,0"/>
-                <Image Source="/Assets/New/maNew2.png"
-                       Grid.Column="1"
-                       Height="100" Width="300"
-                       VerticalAlignment="Top"
-                       Margin="0,55,0,0"/>
-                <Image 
-                    Grid.Column = "1"
-                    Source="/Assets/New/arrow.png"
-                    Stretch="Fill" 
-                    x:Name="Ia_Arrow"
-                    Height="140" Width="14" 
-                    StretchDirection="Both" 
-                    VerticalAlignment="Top"
-                    Margin="0,96,0,0" 
-                    MouseDown="Ia_Arrow_MouseDown"
-                    RenderTransformOrigin="0.5,0.955">
-
-
-
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="-55"/>
-                    </Image.RenderTransform>
-
-                    <!--<Image.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter" >
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation 
-                                        Storyboard.TargetProperty="RenderTransform.Angle"
-                                        From="-57.5" To="{Binding Path=RotateValue}" 
-                                        Duration="0:0:.4">
-                                        <DoubleAnimation.EasingFunction>
-                                            <QuarticEase />
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>
-                                    -->
-                    <!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
-                                        <DoubleAnimation.EasingFunction>
-                                            <QuarticEase />
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>-->
-                    <!--
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Image.Triggers>-->
-
-
-                </Image>
-                <StackPanel 
-                    Orientation="Horizontal"
+                <TextBlock
+                    Text="mA"
+                    FontSize="22"
+                    FontWeight="Bold"
                     HorizontalAlignment="Center"
-                    Margin="0,270,0,0"
-                    VerticalAlignment="Top"
-                    Grid.Column="1">
-                    <Button Content="x2"
-                            Width="30" Height="30"/>
-                    <Button Content="x4"
-                            Width="30" Height="30" />
-                    <Button Content="x10"
-                            Width="30" Height="30" />
-                    <Button Content="x40"
-                            Width="30" Height="30"/>
-                </StackPanel>
+                    Margin="0,10,0,0"/>
+                
+
+            </StackPanel>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-                <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*" />
-
-                    </Grid.RowDefinitions>
-
-                    <TextBlock
-                    Grid.Column="1"
-                    Text="U (анода)" 
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                <TextBlock 
+                    Text="Ua (Анодное напряжение)" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,20,0,0"
+                    FontWeight="Black"
+                    FontSize="24"/>
+                <TextBox 
+                    BorderBrush="#252525"
+                    BorderThickness="10"
+                    Padding="5"
+                    Foreground="#252525"
+                    x:Name="Ua_TextBox"
+                    Text="0,00"
+                    HorizontalAlignment="Center" 
+                    Margin="0,40,0,0"
+                    FontSize="62"
+                    FontFamily="a_LCDNova"/>
+                <TextBlock
+                    Text="В"
+                    FontSize="22"
+                    FontWeight="Bold"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="0,20,0,0"/>
+                    Margin="0,10,0,0"/>
 
-
-
-                    <Ellipse
-                    Grid.Column="1"
-                    Width="10"
-                    Height="10"
-                    Fill="Blue"
-                    VerticalAlignment="Top"
-                    Margin="0,224,3.5,0"/>
-                    <Image Source="/Assets/New/V.png"
-                       Grid.Column="1"
-                       Height="100" Width="300"
-                       VerticalAlignment="Top"
-                       Margin="0,55,0,0"/>
-                    <Image 
-                    Grid.Column = "1"
-                    MouseDown="Ua_Arrow_MouseDown"
-                    Source="/Assets/New/arrow.png"
-                    Stretch="Fill" 
-                    x:Name="Ua_Arrow"
-                    Height="140" Width="14" 
-                    StretchDirection="Both" 
-                    VerticalAlignment="Top"
-                    Margin="0,96,0,0" 
-                    RenderTransformOrigin="0.5,0.955">
-
-
-
-                        <Image.RenderTransform>
-                            <RotateTransform Angle="4"/>
-                        </Image.RenderTransform>
-
-                        <!--<Image.Triggers>
-                            <EventTrigger RoutedEvent="MouseEnter" >
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation 
-                                        Storyboard.TargetProperty="RenderTransform.Angle"
-                                        From="-57.5" To="{Binding Path=RotateValue}" 
-                                        Duration="0:0:.4">
-                                            <DoubleAnimation.EasingFunction>
-                                                <QuarticEase />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        -->
-                        <!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.RotateY" To="1" Duration="0:0:.4" >
-                                        <DoubleAnimation.EasingFunction>
-                                            <QuarticEase />
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>-->
-                        <!--
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Image.Triggers>-->
-
-
-                    </Image>
-                    <StackPanel 
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Margin="0,270,0,0"
-                    VerticalAlignment="Top"
-                    Grid.Column="1">
-                        <Button Content="x2"
-                            Width="30" Height="30"/>
-                        <Button Content="x4"
-                            Width="30" Height="30" />
-                        <Button Content="x10"
-                            Width="30" Height="30" />
-                        <Button Content="x40"
-                            Width="30" Height="30"/>
-                    </StackPanel>
-
-
-                    <Grid Height="120" VerticalAlignment="Bottom" Grid.Row="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                        </Grid.RowDefinitions>
-
-                        <StackPanel  
-                        Orientation="Horizontal"
-                        VerticalAlignment="Bottom"
-                        Grid.Row="0"/>
-                        <Button Grid.Row="0" Width="100" Height="30" 
-                            HorizontalAlignment="Right"
-                            Margin="0,0,20,0"
-                            Content="Задать"
-                            x:Name="UaRead"
-                            Click="UaRead_Click"/>
-                    </Grid>
-                </Grid>
-
-
-
-            </Grid>
+                <Button
+                    Click="UaRead_Click"
+                    Content="Задать"
+                    Width="100"
+                    Height="30"
+                    Margin="0,50,0,0"/>
+            </StackPanel>
         </Grid>
 
     </Grid>

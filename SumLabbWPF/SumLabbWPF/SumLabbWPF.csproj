@@ -61,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="HelpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,13 +73,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LabDataVM.cs" />
     <Compile Include="MainVM.cs" />
+    <Compile Include="OTSWindow.xaml.cs">
+      <DependentUpon>OTSWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OTSWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -119,6 +133,37 @@
     <Resource Include="Assets\New\mAnew.png" />
     <Resource Include="Assets\New\mAnew2.png" />
     <Resource Include="Assets\New\V.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\New\frame.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\New\Appliances.png" />
+    <Resource Include="Assets\New\DataGrid.png" />
+    <Resource Include="Assets\New\Toolbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\New\Example.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\New\Page1.png" />
+    <Resource Include="Assets\New\Page10.png" />
+    <Resource Include="Assets\New\Page11.png" />
+    <Resource Include="Assets\New\Page12.png" />
+    <Resource Include="Assets\New\Page13.png" />
+    <Resource Include="Assets\New\Page14.png" />
+    <Resource Include="Assets\New\Page15.png" />
+    <Resource Include="Assets\New\Page16.png" />
+    <Resource Include="Assets\New\Page17.png" />
+    <Resource Include="Assets\New\Page18.png" />
+    <Resource Include="Assets\New\Page2.png" />
+    <Resource Include="Assets\New\Page3.png" />
+    <Resource Include="Assets\New\Page4.png" />
+    <Resource Include="Assets\New\Page5.png" />
+    <Resource Include="Assets\New\Page6.png" />
+    <Resource Include="Assets\New\Page7.png" />
+    <Resource Include="Assets\New\Page8.png" />
+    <Resource Include="Assets\New\Page9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
