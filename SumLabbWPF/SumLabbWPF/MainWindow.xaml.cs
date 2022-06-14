@@ -108,14 +108,14 @@ namespace SumLabbWPF
             //Ia_TextBox.Text = (UaCurrent * 1000).ToString() + " " + (IcCurrent * 1000).ToString() + "     =     " + Ia.ToString();
             //tb.Text = UaCurrent.ToString() + "  " + IcCurrent.ToString() + " = " + Ia.ToString();
 
-            Ia_TextBox.Text = Math.Round(Ia, 6).ToString();
+            Ia_TextBox.Text = Math.Round(Ia, 2).ToString();
             return 0;
         }
         
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
 

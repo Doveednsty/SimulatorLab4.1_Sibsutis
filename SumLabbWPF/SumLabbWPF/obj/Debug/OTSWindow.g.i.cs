@@ -52,7 +52,7 @@ namespace SumLabbWPF {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SumLabbWPF;component/otswindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Симулятор Лабораторной работы №4.1 СибГУТИ;component/otswindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\OTSWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

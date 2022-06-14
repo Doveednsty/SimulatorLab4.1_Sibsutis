@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SumLabbWPF" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Симулятор лабораторной работы №4.1" WindowStartupLocation="CenterScreen" 
+        Title="Симулятор лабораторной работы №4.1" WindowStartupLocation="CenterOwner" 
         FontFamily="Times New Roman" FontSize="14" 
-        Height="950" Width="1400" 
-        MinHeight="700" MinWidth="1000"
+        Height="Auto" 
+        Width="Auto"
+        SizeToContent="Height" 
+        x:Name="MainWin"
         Loaded="Window_Loaded">
 
 
@@ -25,10 +27,31 @@
         </Grid.RowDefinitions>
 
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button x:Name="HelpBtn" Click="HelpBtn_Click" Width="100" Height="30" Content="Помощь" />
-            <Button x:Name="OTS" Click="OTS_Click" Width="250" Height="30" Content="Основные теоретические сведения" />
-        </ToolBar>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <ToolBar Grid.Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" 
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            x:Name="HelpBtn" 
+                            Click="HelpBtn_Click" 
+                            Content="Помощь      " />
+                    <Button 
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Grid.Column="2" 
+                        x:Name="OTS" 
+                        Click="OTS_Click" 
+                        Content="Основные теоретические сведения" />
+                </Grid>
+            </ToolBar>
+            
+        </Grid>
 
 
         <DataGrid 
@@ -36,10 +59,10 @@
             ItemsSource="{Binding LabData}" 
             SelectedItem="{Binding SelectedItem}" 
             CanUserAddRows="True" CanUserDeleteRows="True" 
-            CanUserSortColumns="True" 
+            CanUserSortColumns="False" 
             CanUserReorderColumns="True"
             ColumnWidth="*"
-            FontSize="20"
+            FontSize="12 pt"
             AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn FontSize="24" Header="Ток соленоида" Binding="{Binding IcDG}"/>
@@ -66,7 +89,7 @@
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.5*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
@@ -75,7 +98,9 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <StackPanel Grid.Row="0" 
+                        HorizontalAlignment="Center" 
+                        Margin="0,0,0,0">
                 <TextBlock 
                     Text="Ic (ток соленоида)" 
                     HorizontalAlignment="Center" 
@@ -88,7 +113,7 @@
                     BorderThickness="10"
                     Padding="5"
                     Foreground="#252525"
-                    Text="0,00"
+                    Text="{Binding ElementName=IaSlider, Path=Value}"
                     x:Name="Ic_TextBox"
                     PreviewTextInput="Ic_TextBox_PreviewTextInput"
                     HorizontalAlignment="Center" 
@@ -102,13 +127,30 @@
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     Margin="0,10,0,0"/>
+
+                <Slider
+                    Width="370"
+                    SmallChange="1"
+                    TickFrequency="20"
+                    IsSnapToTickEnabled="True"
+                    LargeChange="1"
+                    Minimum="0.00"
+                    Maximum="1000.00"
+                    x:Name="IaSlider"
+                    Margin="0,20,0,0"
+                    BorderThickness="3"
+                    Foreground="Black"
+                    Background="#f0f0f0"
+                    TickPlacement="TopLeft"
+                    BorderBrush="#f0f0f0" />
+
                 <Button
                     x:Name="CalcBtn"
                     Click="CalcBtn_Click"
-                    Content="Расчёт"
+                    Content="Установить"
                     Width="100"
                     Height="30"
-                    Margin="0,50,0,0"/>
+                    Margin="0,30,0,0"/>
             </StackPanel>
 
 
@@ -116,7 +158,7 @@
 
             <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
                 <TextBlock 
-                    Text="Ia (ток соленоида)" 
+                    Text="Ia (анодный ток)" 
                     HorizontalAlignment="Center" 
                     Margin="0,20,0,0"
                     FontWeight="Black"
@@ -161,7 +203,7 @@
                     Padding="5"
                     Foreground="#252525"
                     x:Name="Ua_TextBox"
-                    Text="0,00"
+                    Text="{Binding ElementName=UaSlider, Path=Value}"
                     HorizontalAlignment="Center" 
                     Margin="0,40,0,0"
                     FontSize="62"
@@ -172,13 +214,25 @@
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     Margin="0,10,0,0"/>
-
+                <Slider
+                    SmallChange="0.1"
+                    Minimum="16"
+                    Maximum="22"
+                    x:Name="UaSlider"
+                    Margin="0,20,0,0"
+                    BorderThickness="3"
+                    Foreground="Black"
+                    Background="#f0f0f0"
+                    TickPlacement="TopLeft"
+                    IsSnapToTickEnabled="True"
+                    BorderBrush="#f0f0f0" />
                 <Button
                     Click="UaRead_Click"
+                    VerticalAlignment="Top"
                     Content="Задать"
                     Width="100"
                     Height="30"
-                    Margin="0,50,0,0"/>
+                    Margin="0,20,0,10"/>
             </StackPanel>
         </Grid>
 
